@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { Suspense } from 'react';
@@ -29,11 +30,12 @@ const projects = [
   { title: "Project Gamma", description: "Designed a scalable cloud network for a large enterprise.", tech: ["AWS", "Terraform", "Kubernetes"] },
 ];
 
+// Updated team members as requested
 const teamMembers = [
-  { name: "Alex Chen", role: "Founder & CEO", image: "https://picsum.photos/seed/alex/100/100" },
-  { name: "Maria Garcia", role: "Lead Cybersecurity Analyst", image: "https://picsum.photos/seed/maria/100/100" },
-  { name: "Sam Jones", role: "Head of AI Research", image: "https://picsum.photos/seed/sam/100/100" },
-  { name: "Li Wei", role: "Senior Network Engineer", image: "https://picsum.photos/seed/li/100/100" },
+  { name: "Maitullah Khan", role: "CEO & Founder", image: "https://picsum.photos/seed/maitullah/100/100" },
+  { name: "Muhammad Afzaal", role: "Senior Network Engineer", image: "https://picsum.photos/seed/afzaal/100/100" },
+  { name: "Muneeb ur Rehman", role: "Senior Data Scientist", image: "https://picsum.photos/seed/muneeb/100/100" },
+  { name: "Salman Aijaz", role: "MERN Stack Developer", image: "https://picsum.photos/seed/salman/100/100" },
 ];
 
 export default function Home() {
@@ -118,13 +120,13 @@ export default function Home() {
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Meet Our Team</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {teamMembers.map((member, index) => (
-              <div key={index} className="text-center">
-                <Avatar className="w-24 h-24 mx-auto mb-4 border-2 border-primary">
+              <div key={index} className="text-center transition-transform duration-300 hover:scale-105">
+                <Avatar className="w-24 h-24 mx-auto mb-4 border-2 border-primary shadow-md transition-shadow hover:shadow-lg">
                   <AvatarImage src={member.image} alt={member.name} />
-                  <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                  <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('').toUpperCase()}</AvatarFallback>
                 </Avatar>
                 <h3 className="text-lg font-semibold">{member.name}</h3>
-                <p className="text-muted-foreground">{member.role}</p>
+                <p className="text-sm text-muted-foreground">{member.role}</p>
               </div>
             ))}
           </div>
@@ -166,3 +168,4 @@ export default function Home() {
     </div>
   );
 }
+
