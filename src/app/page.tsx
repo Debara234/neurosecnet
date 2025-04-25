@@ -32,10 +32,10 @@ const projects = [
 
 // Updated team members as requested
 const teamMembers = [
-  { name: "Maitullah Khan", role: "CEO & Founder", image: "https://picsum.photos/seed/maitullah/100/100" },
-  { name: "Muhammad Afzaal", role: "Senior Network Engineer", image: "https://picsum.photos/seed/afzaal/100/100" },
-  { name: "Muneeb ur Rehman", role: "Senior Data Scientist", image: "https://picsum.photos/seed/muneeb/100/100" },
-  { name: "Salman Aijaz", role: "MERN Stack Developer", image: "https://picsum.photos/seed/salman/100/100" },
+  { name: "Matiullah Khan", role: "CEO & Founder", image: "" },
+  { name: "Muhammad Afzaal", role: "Senior Network Engineer", image: "" },
+  { name: "Muneeb ur Rehman", role: "Senior Data Scientist", image: "public/images/muneeb.jpg" },
+  { name: "Salman Aijaz", role: "MERN Stack Developer", image: "" },
 ];
 
 export default function Home() {
