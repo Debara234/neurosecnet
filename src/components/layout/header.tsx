@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -21,12 +22,17 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false); // State to track component mount
 
+  // Effects
   useEffect(() => {
+    setMounted(true); // Set mounted to true after initial render
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
     window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Initialize scroll state on mount
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -34,17 +40,59 @@ export default function Header() {
     setTheme(theme === "light" ? "dark" : "light");
   };
 
-    // Close sheet when a link is clicked
+  // Close sheet when a link is clicked
   const handleLinkClick = () => {
     setIsOpen(false);
   };
 
+  // Render a basic structure or null until mounted to avoid hydration mismatch
+  if (!mounted) {
+    return (
+      <header
+        className={cn(
+          "sticky top-0 z-50 w-full transition-all duration-300"
+          // Initial state without scroll check to prevent mismatch
+        )}
+      >
+        <div className="container mx-auto px-4 flex items-center justify-between h-16">
+          <Link href="#home" className="text-xl font-bold text-primary">
+            NeuroSecNet
+          </Link>
+          {/* Render navigation statically or as placeholder */}
+          <nav className="hidden md:flex items-center space-x-1">
+            {navItems.map((item) => (
+              <Button key={item.label} variant="ghost" asChild>
+                <Link href={item.href}>{item.label}</Link>
+              </Button>
+            ))}
+          </nav>
+          <div className="flex items-center space-x-2">
+            {/* Placeholder for theme toggle */}
+            <div className="h-10 w-10 p-2"> {/* Match Button size="icon" */}
+               <Sun className="h-[1.2rem] w-[1.2rem] invisible" /> {/* Keep space */}
+            </div>
+            {/* Placeholder for bot icon */}
+            <Button variant="ghost" size="icon" aria-label="Open chatbot" disabled>
+              <Bot className="h-[1.2rem] w-[1.2rem]" />
+            </Button>
+            {/* Mobile Nav Trigger Placeholder */}
+            <div className="md:hidden">
+              <Button variant="ghost" size="icon" aria-label="Open menu" disabled>
+                <Menu className="h-6 w-6" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </header>
+    );
+  }
 
+  // Render the full header once mounted
   return (
     <header
       className={cn(
         "sticky top-0 z-50 w-full transition-all duration-300",
-        isScrolled ? "bg-background/95 backdrop-blur-sm shadow-md border-b" : "bg-transparent"
+        isScrolled ? "bg-background/95 backdrop-blur-sm shadow-md border-b border-border/50" : "bg-transparent"
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between h-16">
@@ -97,3 +145,4 @@ export default function Header() {
     </header>
   );
 }
+

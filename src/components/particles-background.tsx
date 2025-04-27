@@ -1,17 +1,19 @@
+
 "use client";
 
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useEffect, useState } from 'react';
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import type { Container, Engine, ISourceOptions } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim"; // Import the slim preset
 import { useTheme } from 'next-themes';
 
 const ParticlesBackground = () => {
-  const [init, setInit] = React.useState(false);
-  const { theme } = useTheme();
+  const [init, setInit] = useState(false);
+  const [mounted, setMounted] = useState(false); // State to track component mount
+  const { theme, resolvedTheme } = useTheme(); // Use resolvedTheme for initial server render match
 
   // Initialize particles engine
-  React.useEffect(() => {
+  useEffect(() => {
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
     }).then(() => {
@@ -19,13 +21,26 @@ const ParticlesBackground = () => {
     });
   }, []);
 
+  // Track mount state
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+
   const particlesLoaded = useCallback(async (container: Container | undefined) => {
     // console.log("Particles loaded", container); // Optional: log when particles are loaded
   }, []);
 
-  const options: ISourceOptions = useMemo(() => {
-    const lineColor = theme === 'dark' ? "#ffffff" : "#334155"; // White for dark, slate-700 for light
-    const particleColor = theme === 'dark' ? "#ffffff" : "#0f172a"; // White for dark, slate-900 for light
+  const options: ISourceOptions | undefined = useMemo(() => {
+    // Only compute options if mounted and init is true
+    if (!mounted || !init) {
+      return undefined;
+    }
+
+    // Use the actual theme ('light' or 'dark') once mounted
+    const currentTheme = theme === 'system' ? resolvedTheme : theme;
+    const lineColor = currentTheme === 'dark' ? "#ffffff" : "#334155"; // White for dark, slate-700 for light
+    const particleColor = currentTheme === 'dark' ? "#ffffff" : "#0f172a"; // White for dark, slate-900 for light
 
     return {
       background: {
@@ -112,10 +127,14 @@ const ParticlesBackground = () => {
       },
       detectRetina: true,
     };
-  }, [theme]); // Recompute options when theme changes
+    // Depend on mounted state and the actual theme (or resolvedTheme if system)
+  }, [mounted, init, theme, resolvedTheme]);
 
-  if (!init) {
-    return null; // Don't render anything until initialized
+  // Render null or a placeholder if not initialized or not mounted
+  if (!init || !mounted || !options) {
+     // Render a simple placeholder div or null
+     // Returning null might be better to avoid layout shifts
+    return <div className="absolute inset-0 z-0 bg-transparent" />; // Placeholder or null
   }
 
   return (
