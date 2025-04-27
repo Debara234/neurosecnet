@@ -30,16 +30,28 @@ const projects = [
   { title: "Project Gamma", description: "Designed a scalable cloud network for a large enterprise.", tech: ["AWS", "Terraform", "Kubernetes"] },
 ];
 
-// Updated team members as requested
+// Updated team members with corrected image paths (relative to /public)
+// Fallback will show initials if image path is empty or invalid.
 const teamMembers = [
-  { name: "Matiullah Khan", role: "CEO & Founder", image: "" },
-  { name: "Muhammad Afzaal", role: "Senior Network Engineer", image: "" },
-  { name: "Muneeb ur Rehman", role: "Senior Data Scientist", image: "public/images/muneeb.jpg" },
-  { name: "Salman Aijaz", role: "MERN Stack Developer", image: "" },
+  { name: "Matiullah Khan", role: "CEO & Founder", image: "/images/matiullah.jpg" }, // Example path
+  { name: "Muhammad Afzaal", role: "Senior Network Engineer", image: "" }, // Will use fallback
+  { name: "Muneeb ur Rehman", role: "Senior Data Scientist", image: "/images/muneeb.jpg" }, // Corrected path
+  { name: "Salman Aijaz", role: "MERN Stack Developer", image: "/images/salman.jpg" }, // Example path
 ];
 
 export default function Home() {
   const { toast } = useToast();
+
+  // Function to safely generate initials
+  const getInitials = (name: string): string => {
+    if (!name) return "";
+    return name
+      .split(' ')
+      .map(n => n[0])
+      .filter(Boolean) // Ensure we don't get undefined if name is empty or has extra spaces
+      .join('')
+      .toUpperCase();
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -122,8 +134,10 @@ export default function Home() {
             {teamMembers.map((member, index) => (
               <div key={index} className="text-center transition-transform duration-300 hover:scale-105">
                 <Avatar className="w-24 h-24 mx-auto mb-4 border-2 border-primary shadow-md transition-shadow hover:shadow-lg">
+                  {/* AvatarImage will attempt to load the src. If it fails or src is empty, AvatarFallback will be displayed. */}
                   <AvatarImage src={member.image} alt={member.name} />
-                  <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('').toUpperCase()}</AvatarFallback>
+                  {/* AvatarFallback displays initials if the image doesn't load */}
+                  <AvatarFallback>{getInitials(member.name)}</AvatarFallback>
                 </Avatar>
                 <h3 className="text-lg font-semibold">{member.name}</h3>
                 <p className="text-sm text-muted-foreground">{member.role}</p>
@@ -168,4 +182,3 @@ export default function Home() {
     </div>
   );
 }
-
