@@ -45,46 +45,13 @@ export default function Header() {
     setIsOpen(false);
   };
 
-  // Render a basic structure or null until mounted to avoid hydration mismatch
+  // Render null until mounted to avoid hydration mismatch
   if (!mounted) {
-    return (
-      <header
-        className={cn(
-          "sticky top-0 z-50 w-full transition-all duration-300"
-          // Initial state without scroll check to prevent mismatch
-        )}
-      >
-        <div className="container mx-auto px-4 flex items-center justify-between h-16">
-          <Link href="#home" className="text-xl font-bold text-primary">
-            NeuroSecNet
-          </Link>
-          {/* Render navigation statically or as placeholder */}
-          <nav className="hidden md:flex items-center space-x-1">
-            {navItems.map((item) => (
-              <Button key={item.label} variant="ghost" asChild>
-                <Link href={item.href}>{item.label}</Link>
-              </Button>
-            ))}
-          </nav>
-          <div className="flex items-center space-x-2">
-            {/* Placeholder for theme toggle */}
-            <div className="h-10 w-10 p-2"> {/* Match Button size="icon" */}
-               <Sun className="h-[1.2rem] w-[1.2rem] invisible" /> {/* Keep space */}
-            </div>
-            {/* Placeholder for bot icon */}
-            <Button variant="ghost" size="icon" aria-label="Open chatbot" disabled>
-              <Bot className="h-[1.2rem] w-[1.2rem]" />
-            </Button>
-            {/* Mobile Nav Trigger Placeholder */}
-            <div className="md:hidden">
-              <Button variant="ghost" size="icon" aria-label="Open menu" disabled>
-                <Menu className="h-6 w-6" />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
-    );
+    // Returning null or a very basic, static placeholder is often safer for hydration
+    // Ensure this placeholder has the same basic tag structure if not null
+     return (
+      <header className="sticky top-0 z-50 w-full h-16 bg-transparent"></header>
+     );
   }
 
   // Render the full header once mounted
@@ -145,4 +112,3 @@ export default function Header() {
     </header>
   );
 }
-

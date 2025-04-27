@@ -14,6 +14,7 @@ const ParticlesBackground = () => {
 
   // Initialize particles engine
   useEffect(() => {
+    // Initialize only on the client side
     initParticlesEngine(async (engine) => {
       await loadSlim(engine);
     }).then(() => {
@@ -130,11 +131,10 @@ const ParticlesBackground = () => {
     // Depend on mounted state and the actual theme (or resolvedTheme if system)
   }, [mounted, init, theme, resolvedTheme]);
 
-  // Render null or a placeholder if not initialized or not mounted
+  // Render null or a placeholder if not initialized or not mounted to prevent hydration mismatch
   if (!init || !mounted || !options) {
-     // Render a simple placeholder div or null
-     // Returning null might be better to avoid layout shifts
-    return <div className="absolute inset-0 z-0 bg-transparent" />; // Placeholder or null
+     // Returning null is safest for hydration
+    return null;
   }
 
   return (
