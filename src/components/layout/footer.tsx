@@ -13,8 +13,8 @@ const navItems = [
 ];
 
 const socialLinks = [
-  { label: "GitHub", icon: Github, href: "https://github.com" },
-  { label: "LinkedIn", icon: Linkedin, href: "https://linkedin.com" },
+  { label: "GitHub", icon: Github, href: "https://github.com/Muneeb502" },
+  { label: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/muneeb-ur-rehman-99580b277/" },
   { label: "Twitter", icon: Twitter, href: "https://twitter.com" },
 ];
 
@@ -58,10 +58,10 @@ export default function Footer() {
               ))}
             </div>
             <p className="text-sm text-muted-foreground">
-              Email: <a href="mailto:info@neurosecnet.example" className="hover:text-primary hover:underline">info@neurosecnet.example</a>
+              Email: <a href="mailto:mu0476080@gmail.com" className="hover:text-primary hover:underline">mu0476080@gmail.com</a>
             </p>
              <p className="text-sm text-muted-foreground">
-              Phone: +1 (555) 123-4567
+              Phone: +92 (306) 161-9009
             </p>
           </div>
         </div>
