@@ -33,7 +33,7 @@ const projects = [
 // Updated team members with corrected image paths (relative to /public)
 // Fallback will show initials if image path is empty or invalid.
 const teamMembers = [
-  { name: "Muneeb ur Rehman", role: "CEO & AI Engineer", image: "/images/muneeb.jpg" }, // Example path
+  { name: "Muneeb ur Rehman", role: "CEO & AI Engineer", image: "myimg1.jpg" }, // Example path
   { name: "Muhammad Afzaal", role: "Co-Founder & Senior Network Engineer", image: "" }, // Will use fallback
   { name: "Matiullah Khan", role: "Senior Cyber Security Engineer", image: "/images/matiullah.jpg" }, // Corrected path
   { name: "Abdul Moiz", role: "Junior Cyber Security Engineer", image: "/images/salman.jpg" }, // Example path
