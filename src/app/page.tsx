@@ -35,7 +35,7 @@ const projects = [
 const teamMembers = [
   { name: "Muneeb ur Rehman", role: "CEO & AI Engineer", image: "myimg1.jpg" }, // Example path
   { name: "Muhammad Afzaal", role: "Founder & Senior Network Engineer", image: "" },
-  { name: "Huzaifa Ahmed", role: "Co-Founder & Inforation Security Engineer", image: "/images/salman.jpg" },// Will use fallback
+  { name: "Huzaifa Ahmed", role: "Co-Founder & Information Security Engineer", image: "/images/salman.jpg" },// Will use fallback
   { name: "Matiullah Khan", role: "Senior Cyber Security Engineer", image: "/images/matiullah.jpg" }, // Corrected path
   { name: "Abdul Moiz", role: "Junior Cyber Security Engineer", image: "/images/salman.jpg" }, // Example path
 ];
