@@ -37,7 +37,8 @@ const teamMembers = [
   { name: "Muhammad Afzaal", role: "Founder & Senior Network Engineer", image: "" },
   { name: "Huzaifa Ahmed", role: "Co-Founder & Information Security Engineer", image: "/images/salman.jpg" },// Will use fallback
   { name: "Matiullah Khan", role: "Senior Cyber Security Engineer", image: "/images/matiullah.jpg" }, // Corrected path
-  { name: "Abdul Moiz", role: "Junior Cyber Security Engineer", image: "/images/salman.jpg" }, // Example path
+  { name: "Abdul Moiz", role: "Junior Cyber Security Engineer", image: "/images/salman.jpg" },
+  { name: "Salman Aijaz", role: "SOC Analyst", image: "/images/salman.jpg" },// Example path
 ];
 
 export default function Home() {
